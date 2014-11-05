@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>com.datumbox</groupId>
+    <artifactId>lpsolve</artifactId>
+    <version>5.5.2.0</version>
+    <packaging>jar</packaging>
+    
+    <name>lpsolve</name>
+    <description>Mixed Integer Linear Programming (MILP) solver lp_solve solves pure linear, (mixed) integer/binary, semi-cont and special ordered sets (SOS) models.lp_solve is written in ANSI C and can be compiled on many different platforms like Linux and WINDOWS.</description>
+    <url>http://sourceforge.net/projects/lpsolve/</url>
+    
+    <developers>
+        <developer>
+            <id>juergen.ebert</id>
+            <name>Juergen Ebert</name>
+            <email>juergen.ebert@web.de</email>
+        </developer>
+        <developer>
+            <id>buttrey</id>
+            <name>Samuel E. Buttrey</name>
+            <email>buttrey@nps.edu</email>
+        </developer>
+    </developers>
+    
+    <licenses>
+        <license>
+            <name>GNU General Public License (GPL)</name>
+            <url>http://www.gnu.org/licenses/gpl-2.0.txt</url>
+        </license>
+    </licenses>    
+    
+    <properties>
+        <java-version>1.8</java-version>
+        <maven-plugin-version>2.3.2</maven-plugin-version>
+        <maven-surfire-plugin-version>2.17</maven-surfire-plugin-version>
+        <junit-version>4.11</junit-version>
+        <maven-javadoc-plugin-version>2.10.1</maven-javadoc-plugin-version>
+        <maven-source-plugin-version>2.4</maven-source-plugin-version>
+        <gpg-plugin-version>1.5</gpg-plugin-version>
+        <gpg.keyname>7083A486</gpg.keyname>
+    </properties>
+    
+    <scm>
+        <connection>scm:git:git@github.com:datumbox/lpsolve.git</connection>
+        <url>scm:git:git@github.com:datumbox/lpsolve.git</url>
+        <developerConnection>scm:git:git@github.com:datumbox/lpsolve.git</developerConnection>
+    </scm>
+    
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>${maven-plugin-version}</version>
+                <configuration>
+                    <source>${java-version}</source>
+                    <target>${java-version}</target>
+                    <showDeprecation>true</showDeprecation>
+                    <encoding>UTF-8</encoding>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>${maven-surfire-plugin-version}</version>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-javadoc-plugin</artifactId>
+                <version>${maven-javadoc-plugin-version}</version>
+			    <executions>
+			        <execution>
+			            <id>attach-javadocs</id>
+			            <goals>
+			                <goal>jar</goal>
+			            </goals>
+			            <configuration>
+			                <additionalparam>-Xdoclint:none</additionalparam>
+			            </configuration>
+			        </execution>
+			    </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-source-plugin</artifactId>
+                <version>${maven-source-plugin-version}</version>
+                <executions>
+                    <execution>
+                        <id>attach-sources</id>
+                        <goals>
+                            <goal>jar</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+    
+    <dependencies>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>${junit-version}</version>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+    
+	<profiles>
+	    <profile>
+	        <id>release-sign-artifacts</id>
+	        <activation>
+	            <property>
+	                <name>performRelease</name>
+	                <value>true</value>
+	            </property>
+	        </activation>
+	        <build>
+	            <plugins>
+		            <plugin>
+		                <groupId>org.apache.maven.plugins</groupId>
+		                <artifactId>maven-gpg-plugin</artifactId>
+		                <version>${gpg-plugin-version}</version>
+		                <executions>
+		                    <execution>
+		                        <id>sign-artifacts</id>
+		                        <phase>verify</phase>
+		                        <goals>
+		                            <goal>sign</goal>
+		                        </goals>
+		                    </execution>
+		                </executions>
+		            </plugin>
+	            </plugins>
+	        </build>
+	    </profile>
+	</profiles>
+</project>
